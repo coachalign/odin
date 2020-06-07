@@ -1,13 +1,13 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@2.1.0
+  node: circleci/node@3.0.0
 
 jobs:
   deploy:
     executor:
       name: node/default
-      tag: 'lts'
+      tag: lts
     parameters:
       stage:
         description: Stage to deploy to
@@ -23,11 +23,6 @@ jobs:
             [[ ! -z "$STAGE" ]] || STAGE=${CIRCLE_BRANCH%%/*}
             echo Deploying service to stage $STAGE
             npm run deploy -- --stage $STAGE
-      # save the .serverless folder to enable looking up & calling the endpoint
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .serverless
 
 workflows:
   version: 2
@@ -40,29 +35,11 @@ workflows:
       # branch
       - deploy:
           name: deploy-branch
-          context: aws-manwaring
+          context: aws-coaches-sandbox
           requires: [node/test]
           filters: &only-branches
             branches:
               ignore: main
-
-      # main - sandbox
-      - deploy:
-          name: deploy-sandbox
-          stage: automation
-          context: aws-sandbox
-          requires: [node/test]
-          filters: &only-main
-            branches:
-              only: main
-
-      # main - manwaring
-      - deploy:
-          name: deploy-manwaring
-          stage: automation
-          context: aws-manwaring
-          requires: [deploy-sandbox]
-          filters: *only-main
 
       # main - coaches-sandbox automation
       - deploy:
@@ -70,7 +47,9 @@ workflows:
           stage: automation
           context: aws-coaches-sandbox
           requires: [node/test]
-          filters: *only-main
+          filters: &only-main
+            branches:
+              only: main
 
       # main - coaches-prod automation
       - deploy:

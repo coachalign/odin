@@ -33,6 +33,8 @@ staticRules:
     - INFRA
     - INFRASTRUCTURE
     - COMMON
+    - SMANWARING
+    - MANWARING
 
   # Odin will only delete a stack if it's status is one of the following
   deleteableStatuses:
