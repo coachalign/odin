@@ -12,10 +12,10 @@ export class CloudFormationStacks {
     const stacks = await cf
       .describeStacks(params)
       .promise()
-      .then(response => response.Stacks);
+      .then((response) => response.Stacks);
     return stacks
-      .map(stack => new CloudFormationStack(stack, this.config))
-      .filter(stack => stack.shouldDelete())
-      .map(stack => stack.name);
+      .map((stack) => new CloudFormationStack(stack, this.config))
+      .filter((stack) => stack.shouldDelete())
+      .map((stack) => stack.name);
   }
 }

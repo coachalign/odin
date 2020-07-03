@@ -13,7 +13,7 @@ export class CloudFormationStack {
   }
 
   private stageIsDeletable(): boolean {
-    const stage = this.stack.Tags.find(tag => tag.Key.toUpperCase() === 'STAGE')?.Value?.toUpperCase();
+    const stage = this.stack.Tags.find((tag) => tag.Key.toUpperCase() === 'STAGE')?.Value?.toUpperCase();
     const canDelete = this.config.stagesToRetain.indexOf(stage) < 0;
     console.debug(`${this.name} is stage ${stage} ${this.getDeletableLog(canDelete)}`);
     return canDelete;
@@ -39,7 +39,7 @@ export class CloudFormationStack {
   }
 
   private nameIsDeletable(): boolean {
-    const canDelete = !this.config.namesToRetain.some(name => this.name.toUpperCase().match(name.toUpperCase()));
+    const canDelete = !this.config.namesToRetain.some((name) => this.name.toUpperCase().match(name.toUpperCase()));
     console.debug(
       `${this.name} ${canDelete ? "doesn't have" : 'has'} a reserved name ${this.getDeletableLog(canDelete)}`
     );

@@ -24,7 +24,7 @@ export class CloudFormationStack {
   private async emptyBuckets(): Promise<any> {
     const buckets = await this.getBucketsToEmpty();
     console.debug('Emptying buckets for stack', this.stackName, ...buckets);
-    return Promise.all(buckets.map(bucket => bucket.empty()));
+    return Promise.all(buckets.map((bucket) => bucket.empty()));
   }
 
   private async getBucketsToEmpty(): Promise<Bucket[]> {
@@ -33,13 +33,13 @@ export class CloudFormationStack {
     const resources = await cf
       .listStackResources(params)
       .promise()
-      .then(res => res.StackResourceSummaries);
+      .then((res) => res.StackResourceSummaries);
     return resources
-      .filter(resource => resource.ResourceType === 'AWS::S3::Bucket')
-      .filter(bucket => {
+      .filter((resource) => resource.ResourceType === 'AWS::S3::Bucket')
+      .filter((bucket) => {
         const { emptyAllBuckets, bucketsToEmpty } = this.config;
         return emptyAllBuckets ? true : bucketsToEmpty.indexOf(bucket.LogicalResourceId) > -1;
       })
-      .map(bucket => new Bucket(bucket.PhysicalResourceId));
+      .map((bucket) => new Bucket(bucket.PhysicalResourceId));
   }
 }

@@ -11,8 +11,8 @@ jest.mock('aws-sdk', () => {
     S3: jest.fn(() => ({
       listObjectsV2: mockListObjectsV2,
       listObjectVersions: mockListObjectVersions,
-      deleteObjects: mockDeleteObjects
-    }))
+      deleteObjects: mockDeleteObjects,
+    })),
   };
 });
 

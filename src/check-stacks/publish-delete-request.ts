@@ -11,7 +11,7 @@ export class PublishDeleteRequest {
     const deleteRequest: DeleteRequest = { stackName: this.stackName, config: this.config };
     const params = {
       Message: JSON.stringify(deleteRequest),
-      TopicArn: process.env.DELETE_STACK_TOPIC
+      TopicArn: process.env.DELETE_STACK_TOPIC,
     };
     console.debug('Publishing delete request with params', params);
     return sns.publish(params).promise();

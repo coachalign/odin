@@ -3,7 +3,7 @@ import {
   defaultDailyConfig,
   listStackResourcesResponse,
   listObjectsV2Output,
-  listObjectVersionsOutput
+  listObjectVersionsOutput,
 } from './sample-data';
 import { DeleteRequest } from './delete-request';
 
@@ -21,12 +21,12 @@ jest.mock('aws-sdk', () => {
     S3: jest.fn(() => ({
       listObjectsV2: mockListObjectsV2,
       listObjectVersions: mockListObjectVersions,
-      deleteObjects: mockDeleteObjects
+      deleteObjects: mockDeleteObjects,
     })),
     CloudFormation: jest.fn(() => ({
       deleteStack: mockDeleteStack,
-      listStackResources: mockListStackResources
-    }))
+      listStackResources: mockListStackResources,
+    })),
   };
 });
 

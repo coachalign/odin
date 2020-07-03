@@ -6,7 +6,7 @@ const mockDescribeStacks = jest
   .mockImplementation(() => ({ promise: () => Promise.resolve(describeStacksOutput) }));
 jest.mock('aws-sdk', () => {
   return {
-    CloudFormation: jest.fn(() => ({ describeStacks: mockDescribeStacks }))
+    CloudFormation: jest.fn(() => ({ describeStacks: mockDescribeStacks })),
   };
 });
 

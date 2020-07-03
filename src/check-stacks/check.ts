@@ -7,7 +7,7 @@ export const handler = wrapper(async ({ event: config, success, error }: Wrapper
   try {
     const stacks = new CloudFormationStacks(config);
     const toDelete = await stacks.getStacksToDelete();
-    await Promise.all(toDelete.map(stack => new PublishDeleteRequest(stack, config).publish()));
+    await Promise.all(toDelete.map((stack) => new PublishDeleteRequest(stack, config).publish()));
     return success('Finished checking stacks for deletion');
   } catch (err) {
     return error(err);

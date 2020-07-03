@@ -16,7 +16,7 @@ export class Bucket {
     let files: S3.Object[] = [];
     let output: S3.ListObjectsV2Output;
     do {
-      let params: S3.ListObjectsV2Request = { Bucket: this.bucketName };
+      const params: S3.ListObjectsV2Request = { Bucket: this.bucketName };
       if (output && output.IsTruncated) {
         params['ContinuationToken'] = output.NextContinuationToken;
       }
@@ -30,7 +30,7 @@ export class Bucket {
   }
 
   private async getAllVersions(files: S3.Object[]): Promise<S3.ObjectVersion[]> {
-    const [...versions] = await Promise.all(files.map(file => this.getAllFileVersions(file)));
+    const [...versions] = await Promise.all(files.map((file) => this.getAllFileVersions(file)));
     return versions.reduce((a, b) => [...a, ...b], []);
   }
 
@@ -38,7 +38,7 @@ export class Bucket {
     let versions: S3.ObjectVersion[] = [];
     let output: S3.ListObjectVersionsOutput;
     do {
-      let params: S3.ListObjectVersionsRequest = { Bucket: this.bucketName, Prefix: file.Key };
+      const params: S3.ListObjectVersionsRequest = { Bucket: this.bucketName, Prefix: file.Key };
       if (output && output.IsTruncated) {
         params['NextKeyMarker'] = output.NextKeyMarker;
         params['NextVersionIdMarker'] = output.NextVersionIdMarker;
@@ -63,8 +63,8 @@ export class Bucket {
     const params = {
       Bucket: this.bucketName,
       Delete: {
-        Objects: versions.map(version => ({ Key: version.Key, VersionId: version.VersionId }))
-      }
+        Objects: versions.map((version) => ({ Key: version.Key, VersionId: version.VersionId })),
+      },
     };
     console.debug('Deleting file versions with params', params);
     return versions.length ? s3.deleteObjects(params).promise() : Promise.resolve();

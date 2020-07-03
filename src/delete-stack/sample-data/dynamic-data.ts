@@ -8,13 +8,13 @@ const resourceSummaries: CloudFormation.StackResourceSummaries = [
     LastUpdatedTimestamp: new Date('December 17, 2019 03:24:00'),
     ResourceStatus: 'CREATE_COMPLETE',
     DriftInformation: {
-      StackResourceDriftStatus: 'IN_SYNC'
-    }
-  }
+      StackResourceDriftStatus: 'IN_SYNC',
+    },
+  },
 ];
 
 export const listStackResourcesResponse = {
-  StackResourceSummaries: resourceSummaries
+  StackResourceSummaries: resourceSummaries,
 };
 
 export const listObjectsV2Output: S3.ListObjectsV2Output = {
@@ -25,13 +25,13 @@ export const listObjectsV2Output: S3.ListObjectsV2Output = {
       LastModified: new Date('December 17, 2019 03:24:00'),
       Owner: {
         DisplayName: 'my-username',
-        ID: '7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32'
+        ID: '7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32',
       },
       Size: 38,
-      StorageClass: 'STANDARD'
-    }
+      StorageClass: 'STANDARD',
+    },
   ],
-  IsTruncated: false
+  IsTruncated: false,
 };
 
 export const listObjectVersionsOutput: S3.ListObjectVersionsOutput = {
@@ -44,11 +44,11 @@ export const listObjectVersionsOutput: S3.ListObjectVersionsOutput = {
       Key: 'index.html',
       Owner: {
         DisplayName: 'my-username',
-        ID: '7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32'
+        ID: '7009a8971cd660687538875e7c86c5b672fe116bd438f46db45460ddcd036c32',
       },
       IsLatest: true,
-      Size: 38
-    }
+      Size: 38,
+    },
   ],
-  IsTruncated: false
+  IsTruncated: false,
 };

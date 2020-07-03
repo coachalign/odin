@@ -6,7 +6,7 @@ import {
   retainName,
   retainStatus,
   retainStage,
-  defaultDailyConfig
+  defaultDailyConfig,
 } from './sample-data';
 
 describe('Check stack', () => {
