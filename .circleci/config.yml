@@ -35,7 +35,7 @@ workflows:
       # branch
       - deploy:
           name: deploy-branch
-          context: aws-coaches-sandbox
+          context: env-coaches-nonprod
           requires: [node/test]
           filters: &only-branches
             branches:
@@ -45,7 +45,7 @@ workflows:
       - deploy:
           name: deploy-coaches-sandbox
           stage: automation
-          context: aws-coaches-sandbox
+          context: env-coaches-nonprod
           requires: [node/test]
           filters: &only-main
             branches:
@@ -55,6 +55,6 @@ workflows:
       - deploy:
           name: deploy-coaches-prod
           stage: automation
-          context: aws-coaches-prod
+          context: env-coaches-prod
           requires: [deploy-coaches-sandbox]
           filters: *only-main
