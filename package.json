@@ -45,6 +45,7 @@
     "husky": "^4.2.5",
     "jest": "^26.1.0",
     "js-yaml": "^3.14.0",
+    "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "serverless": "^1.74.1",
@@ -64,8 +65,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test && npm run validate-circleci && npm run project-stats"
+      "pre-commit": "lint-staged && npm test && npm run validate-circleci && npm run project-stats"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm run lint"
+    ]
   },
   "author": "Made with ♥ by Phillip Manwaring"
 }
