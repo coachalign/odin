@@ -10,6 +10,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: ${self:custom.stage}
+  region: us-east-2
   environment:
     STAGE: ${self:custom.stage}
     NODE_ENV: PRODUCTION

@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@3.0.0
+  node: circleci/node@4.1.0
 
 jobs:
   deploy:
@@ -34,27 +34,27 @@ workflows:
 
       # branch
       - deploy:
-          name: deploy-branch
-          context: env-coaches-nonprod
+          name: deploy branch
+          context: sandbox-env
           requires: [node/test]
           filters: &only-branches
             branches:
               ignore: main
 
-      # main - coaches-sandbox automation
+      # main - sandbox
       - deploy:
-          name: deploy-coaches-sandbox
+          name: deploy sandbox
           stage: automation
-          context: env-coaches-nonprod
+          context: sandbox-env
           requires: [node/test]
           filters: &only-main
             branches:
               only: main
 
-      # main - coaches-prod automation
+      # main - prod
       - deploy:
-          name: deploy-coaches-prod
+          name: deploy prod
           stage: automation
-          context: env-coaches-prod
-          requires: [deploy-coaches-sandbox]
+          context: prod-env
+          requires: [deploy sandbox]
           filters: *only-main
