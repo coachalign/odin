@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk');
+require('aws-sdk');
 import { listObjectsV2Output, listObjectVersionsOutput } from './sample-data';
 
 const mockListObjectsV2 = jest.fn().mockImplementation(() => ({ promise: () => Promise.resolve(listObjectsV2Output) }));

@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk');
+require('aws-sdk');
 import { defaultDailyConfig } from './sample-data';
 
 const mockPublish = jest.fn().mockImplementation(() => ({ promise: () => Promise.resolve() }));

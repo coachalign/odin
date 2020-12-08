@@ -5,7 +5,7 @@ const s3 = new S3({ apiVersion: '2006-03-01' });
 export class Bucket {
   constructor(private bucketName: string) {}
 
-  async empty(): Promise<any> {
+  async empty(): Promise<void> {
     console.debug('Emptying bucket', this.bucketName);
     const files = await this.getAllFiles();
     const versions = await this.getAllVersions(files);
@@ -50,16 +50,16 @@ export class Bucket {
     return versions;
   }
 
-  private async deleteAllFileVersions(versions: S3.ObjectVersion[]): Promise<any> {
+  private async deleteAllFileVersions(versions: S3.ObjectVersion[]): Promise<void> {
     const promises = [];
     while (versions.length > 1000) {
       promises.push(this.deleteVersions(versions.splice(0, 999)));
     }
     promises.push(this.deleteVersions(versions));
-    return Promise.all([promises]);
+    await Promise.all([promises]);
   }
 
-  private async deleteVersions(versions: S3.ObjectVersion[]): Promise<any> {
+  private async deleteVersions(versions: S3.ObjectVersion[]): Promise<void> {
     const params = {
       Bucket: this.bucketName,
       Delete: {
@@ -67,6 +67,8 @@ export class Bucket {
       },
     };
     console.debug('Deleting file versions with params', params);
-    return versions.length ? s3.deleteObjects(params).promise() : Promise.resolve();
+    if (versions.length) {
+      await s3.deleteObjects(params).promise();
+    }
   }
 }

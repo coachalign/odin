@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk');
+require('aws-sdk');
 import { defaultDailyConfig, describeStacksOutput } from './sample-data';
 
 const mockDescribeStacks = jest

@@ -14,17 +14,17 @@ export class CloudFormationStack {
     this.config = request.config;
   }
 
-  async delete() {
+  async delete(): Promise<void> {
     await this.emptyBuckets();
     const params = { StackName: this.stackName };
     console.debug('Deleting stack with params', params);
-    return cf.deleteStack(params).promise();
+    await cf.deleteStack(params).promise();
   }
 
-  private async emptyBuckets(): Promise<any> {
+  private async emptyBuckets(): Promise<void> {
     const buckets = await this.getBucketsToEmpty();
     console.debug('Emptying buckets for stack', this.stackName, ...buckets);
-    return Promise.all(buckets.map((bucket) => bucket.empty()));
+    await Promise.all(buckets.map((bucket) => bucket.empty()));
   }
 
   private async getBucketsToEmpty(): Promise<Bucket[]> {

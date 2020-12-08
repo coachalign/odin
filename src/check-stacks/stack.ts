@@ -20,8 +20,10 @@ export class CloudFormationStack {
   }
 
   private isStale(): boolean {
-    const lastUpdated: any = this.stack.LastUpdatedTime || this.stack.CreationTime;
-    const timeSinceLastUpdate = Math.floor((<any>new Date() - lastUpdated) / 36e5);
+    const lastUpdated: Date = this.stack.LastUpdatedTime || this.stack.CreationTime;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const timeSinceLastUpdate = Math.floor((new Date() - lastUpdated) / 36e5);
     const canDelete = timeSinceLastUpdate >= this.config.staleAfter;
     console.debug(
       `${this.name} was last updated at ${lastUpdated} (${timeSinceLastUpdate} hours ago) ${this.getDeletableLog(

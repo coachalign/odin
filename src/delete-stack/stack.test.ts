@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk');
+require('aws-sdk');
 import {
   defaultDailyConfig,
   listStackResourcesResponse,
