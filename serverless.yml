@@ -2,6 +2,7 @@ service: odin
 
 plugins:
   - serverless-webpack
+  - serverless-plugin-thundra
   - serverless-cloudformation-resource-counter
   - serverless-prune-versions
 
@@ -21,6 +22,7 @@ provider:
         - !Ref AWS::Region
         - !Ref AWS::AccountId
         - delete-stack-${opt:stage, self:provider.stage}
+    thundra_apiKey: ${env:THUNDRA_TOKEN_SANDBOX, env:THUNDRA_TOKEN}
   iamRoleStatements:
     - Effect: Allow
       Resource: '*'

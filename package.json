@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@manwaring/lambda-wrapper": "^4.4.2",
+    "@thundra/core": "^2.12.10",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -50,6 +51,7 @@
     "rimraf": "^3.0.2",
     "serverless": "^2.15.0",
     "serverless-cloudformation-resource-counter": "^1.0.3",
+    "serverless-plugin-thundra": "^2.5.6",
     "serverless-prune-versions": "^1.0.2",
     "serverless-stack-output": "^0.2.3",
     "serverless-webpack": "^5.3.5",
